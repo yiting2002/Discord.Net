@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,6 +7,7 @@ namespace Discord.Audio.Streams
     ///<summary> Wraps data in an RTP frame </summary>
     public class RTPWriteStream : AudioOutStream
     {
+        private readonly AudioClient _client;
         private readonly AudioStream _next;
         private readonly byte[] _header;
         protected readonly byte[] _buffer;
@@ -15,8 +16,9 @@ namespace Discord.Audio.Streams
         private uint _nextTimestamp;
         private bool _hasHeader;
 
-        public RTPWriteStream(AudioStream next, uint ssrc, int bufferSize = 4000)
+        public RTPWriteStream(AudioStream next, IAudioClient client, uint ssrc, int bufferSize = 4000)
         {
+            _client = (AudioClient)client;
             _next = next;
             _ssrc = ssrc;
             _buffer = new byte[bufferSize];
@@ -55,9 +57,7 @@ namespace Discord.Audio.Streams
                 _header[7] = (byte)(_nextTimestamp >> 0);
             }
             Buffer.BlockCopy(_header, 0, _buffer, 0, 12); //Copy RTP header from to the buffer
-            Buffer.BlockCopy(buffer, offset, _buffer, 12, count);
-
-            _next.WriteHeader(_nextSeq, _nextTimestamp, false);
+            count = SecretBox.Encrypt(buffer, offset, count, _buffer, 12, _header, _client.SecretKey);
             await _next.WriteAsync(_buffer, 0, count + 12).ConfigureAwait(false);
         }
 

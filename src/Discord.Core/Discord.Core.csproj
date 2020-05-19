@@ -21,7 +21,16 @@
     <Compile Include="..\Discord.Net.WebSocket\**\*.cs" Link="WebSocket\%(RecursiveDir)%(Filename)%(Extension)" />
     <Compile Remove="..\Discord.Net.WebSocket\obj\**" />
     <Compile Remove="..\Discord.Net.WebSocket\AssemblyInfo.cs" />
+    <Compile Remove="..\Discord.Net.WebSocket\Audio\Opus\**" />
     <Compile Remove="..\Discord.Net.WebSocket\Audio\Sodium\**" />
+    <Compile Remove="..\Discord.Net.WebSocket\Audio\Streams\BufferedWriteStream.cs" />
+    <Compile Remove="..\Discord.Net.WebSocket\Audio\Streams\InputStream.cs" />
+    <Compile Remove="..\Discord.Net.WebSocket\Audio\Streams\JitterBuffer.cs" />
+    <Compile Remove="..\Discord.Net.WebSocket\Audio\Streams\OpusDecodeStream.cs" />
+    <Compile Remove="..\Discord.Net.WebSocket\Audio\Streams\OpusEncodeStream.cs" />
+    <Compile Remove="..\Discord.Net.WebSocket\Audio\Streams\RTPReadStream.cs" />
+    <Compile Remove="..\Discord.Net.WebSocket\Audio\Streams\SodiumDecryptStream.cs" />
+    <Compile Remove="..\Discord.Net.WebSocket\Audio\Streams\SodiumEncryptStream.cs" />
   </ItemGroup>
 
   <ItemGroup>
