@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Discord.Net.Core\**\*.cs" Link="Core\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Remove="..\Discord.Net.Core\obj\**" />
+    <Compile Remove="..\Discord.Net.Core\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Discord.Net.Rest\**\*.cs" Link="Rest\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Remove="..\Discord.Net.Rest\obj\**" />
+    <Compile Remove="..\Discord.Net.Rest\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Discord.Net.WebSocket\**\*.cs" Link="WebSocket\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Remove="..\Discord.Net.WebSocket\obj\**" />
+    <Compile Remove="..\Discord.Net.WebSocket\AssemblyInfo.cs" />
+    <Compile Remove="..\Discord.Net.WebSocket\Audio\Sodium\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Linq.Async" Version="4.1.1" />
+  </ItemGroup>
+
+</Project>
